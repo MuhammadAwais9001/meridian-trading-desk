@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #090b0e;
+  --color-surface: #13171d;
+  --color-surface-2: #1a1f27;
+  --color-fg: #ececea;
+  --color-muted: #8a9088;
+  --color-faint: #5c625c;
+  --color-accent: #d5d8d0;
+  --color-accent-fg: #10130f;
+  --color-border: color-mix(in oklab, #ececea 12%, transparent);
+  --color-border-strong: color-mix(in oklab, #ececea 22%, transparent);
+  --color-long: #5ea87a;
+  --color-long-dim: color-mix(in oklab, #5ea87a 18%, transparent);
+  --color-short: #c56b66;
+  --color-short-dim: color-mix(in oklab, #c56b66 18%, transparent);
+  --color-warn: #c4a15a;
+  --color-ring: #d5d8d0;
+
+  --font-sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --font-mono: "IBM Plex Sans", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 26px;
+
+  --shadow-border: 0 0 0 1px color-mix(in oklab, #ececea 8%, transparent);
+  --shadow-border-hover: 0 0 0 1px color-mix(in oklab, #ececea 14%, transparent);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html,
+  body,
+  #app {
+    min-height: 100%;
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    line-height: 1.5;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+    font-family: var(--font-display);
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  * {
+    border-color: var(--color-border);
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-accent) 30%, transparent);
+    color: var(--color-fg);
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes meridian-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.28;
+  }
+}
+
+@keyframes meridian-scan {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(220%);
+  }
+}
+
+.live-dot {
+  animation: meridian-pulse 1.8s var(--ease-out) infinite;
+}
+
+.scan-bar {
+  animation: meridian-scan 1.6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live-dot,
+  .scan-bar {
+    animation: none;
+  }
+}
